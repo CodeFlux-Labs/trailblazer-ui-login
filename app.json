@@ -1,4 +1,8 @@
 {
-  "name": "trailblazer-ui-login",
-  "slug": "trailblazer-ui-login"
+    "name": "trailblazer-ui-login",
+    "slug": "trailblazer-ui-login",
+    "android": {
+        "package": "com.codeflux.trailblazer",
+        "googleServicesFile": "./google-services.json"
+    }
 }

@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { View, TextInput, Text } from "react-native";
+import { View, TextInput, Text, ImageBackground } from "react-native";
 import { colors } from "../assets/colors";
 
 export interface DefaultProps {
@@ -13,6 +13,8 @@ export interface DefaultProps {
 
 interface RowProps extends DefaultProps {
     gap?: string;
+    centered?: boolean;
+    spaceBetween?: boolean;
 }
 
 export const Row = styled(View)<RowProps>`
@@ -22,9 +24,13 @@ export const Row = styled(View)<RowProps>`
     padding-vertical: ${({ paddingVertical = "0" }) => paddingVertical};
     padding-horizontal: ${({ paddingHorizontal = "0" }) => paddingHorizontal};
     margin: ${({ margin = "0" }) => margin};
-    margin-vertical: ${({ marginVertical = "0" }) => marginVertical};
-    margin-horizontal: ${({ marginHorizontal = "0" }) => marginHorizontal};
+    margin-top: ${({ marginVertical }) => marginVertical || "0px"};
+    margin-bottom: ${({ marginVertical }) => marginVertical || "0px"};
+    margin-left: ${({ marginHorizontal }) => marginHorizontal || "0px"};
+    margin-right: ${({ marginHorizontal }) => marginHorizontal || "0px"};
     gap: ${({ gap = "0" }) => gap};
+    ${({ centered }) => centered && "align-self: center;"}
+    ${({ spaceBetween }) => spaceBetween && "justify-content: space-between;"}
 `;
 
 export const RootView = styled(View)`
@@ -37,13 +43,17 @@ interface TextInputProps extends DefaultProps {
 }
 
 export const DefaultTextInput = styled(TextInput)<TextInputProps>`
+    flex: 1;
     padding: ${({ padding = "5px" }) => padding};
     padding-left: 14px;
+    padding-right: 14px;
     margin: ${({ margin = "0 0 12px 0" }) => margin};
     border-width: 1px;
-    border-color: ${colors.lightGrayishBlue};
+    border-color: ${colors.darkGray};
     border-radius: 10px;
-    height: ${({ height = "50px" }) => height};
+    height: ${({ height = "60px" }) => height};
+    color: #fff;
+    font-family: "SFUIText-Regular";
 `;
 
 interface SectionTitleProps extends DefaultProps {}
@@ -66,27 +76,72 @@ export const TextError = styled(Text)<TextErrorProps>`
 
 export const Container = styled(View)`
     flex: 1;
-    justify-content: center;
-    align-items: center;
-    background-color: #f0f0f0;
-    padding: 20px 15px;
+    padding: 90px 18px 20px 18px;
 `;
 
 interface TitleProps extends DefaultProps {
     centered?: boolean;
+    color?: string;
 }
 
 export const Title = styled(Text)<TitleProps>`
-    font-family: "SFUIText-Semibold";
+    font-family: "SFUIText-Bold";
     font-size: 18px;
-    color: ${colors.secondary};
+    color: ${props => props.color || colors.lightGrayishBlue};
     margin-top: 5px;
     ${({ centered }) => centered && "text-align: center;"}
 `;
 
-export const Subtitle = styled(Text)`
+interface SubtitleProps extends DefaultProps {
+    centered?: boolean;
+    color?: string;
+    marginTop?: string;
+    marginBottom?: string;
+}
+
+export const Subtitle = styled(Text)<SubtitleProps>`
     font-family: "SFUIText-Regular";
     font-size: 14px;
-    color: ${colors.blueGray};
+    color: ${props => props.color || colors.blueGray};
     margin-top: 5px;
+    margin-bottom: 50px;
+    margin-top: ${({ marginTop }) => marginTop || "5px"};
+    margin-bottom: ${({ marginBottom }) => marginBottom || "50px"};
+    ${({ centered }) => centered && "text-align: center;"}
+`;
+
+export const Label = styled(Text)`
+    font-family: "SFUIText-Regular";
+    font-size: 12px;
+    color: ${colors.blueGray};
+`;
+
+export const DefaultText = styled(Text)<TitleProps>`
+    font-family: "SFUIText-Medium";
+    font-size: 16px;
+    color: ${props => props.color || colors.blueGray};
+    ${({ centered }) => centered && "text-align: center;"}
+`;
+
+interface HrProps extends DefaultProps {
+    noFlex?: boolean;
+    color?: string;
+}
+
+export const Hr = styled.View<HrProps>`
+    ${props => (props.noFlex ? "" : "flex: 1;")}
+    border-bottom-width: 1px;
+    border-bottom-color: ${props => props.color || colors.darkGray};
+    margin: ${({ margin = "0" }) => margin};
+    margin-top: ${({ marginVertical }) => marginVertical || "0px"};
+    margin-bottom: ${({ marginVertical }) => marginVertical || "0px"};
+    margin-left: ${({ marginHorizontal }) => marginHorizontal || "0px"};
+    margin-right: ${({ marginHorizontal }) => marginHorizontal || "0px"};
+`;
+
+export const BackgroundContainer = styled(ImageBackground)`
+    flex: 1;
+    width: "100%";
+    height: "100%";
+    background-color: rgba(0, 0, 0, 0.9);
 `;
