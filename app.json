@@ -1,8 +1,15 @@
 {
     "name": "trailblazer-ui-login",
     "slug": "trailblazer-ui-login",
+    "scheme": "com.codeflux.trailblazer",
     "android": {
         "package": "com.codeflux.trailblazer",
-        "googleServicesFile": "./google-services.json"
+        "googleServicesFile": "./google-services.json",
+        "scheme": "com.codeflux.trailblazer"
+    },
+    "extra": {
+        "eas": {
+            "projectId": "0b7fbb29-c0eb-4946-ac85-2b58932da5f2"
+        }
     }
 }

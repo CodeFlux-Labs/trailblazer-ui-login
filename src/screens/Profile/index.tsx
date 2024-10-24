@@ -23,6 +23,7 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     const user = getAuth();
     const [darkModeEnabled, setDarkModeEnable] = useState(false);
     const [notificationEnabled, setNotificationEnabled] = useState(false);
+    const { photoURL, displayName } = user.currentUser;
 
     const renderSwitch = (settter, currentValue) => {
         return (
@@ -100,8 +101,10 @@ const Profile: React.FC<ProfileProps> = ({ navigation }) => {
     return (
         <Container>
             <Row gap="15px">
-                <ProfilePicture source={ProfilePhoto} resizeMode="cover" />
-                <Title color="#000">{user.currentUser?.displayName}</Title>
+                {photoURL && <ProfilePicture src={photoURL} resizeMode="cover" />}
+                {!photoURL && <ProfilePicture src={ProfilePhoto} resizeMode="cover" />}
+
+                <Title color="#000">{displayName}</Title>
             </Row>
             <Hr noFlex color={colors.primaryLight} marginVertical="20px" />
             <Subtitle marginBottom="10px">Account Settings</Subtitle>

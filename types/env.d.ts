@@ -7,4 +7,5 @@ declare module "@env" {
     export const APP_ID: string;
     export const CLIENT_ID: string;
     export const CLIENT_SECRET: string;
+    export const CLIENT_ANDROID_ID: string;
 }
